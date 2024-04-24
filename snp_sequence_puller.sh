@@ -37,7 +37,7 @@ usage() {
 verbose=false
 
 # Parse command line options
-while getopts ":f:p:l:c:a:vh" opt; do
+while getopts ":f:p:l:c:a:r:vh" opt; do
     case ${opt} in
         f | --genome-file )
             genome_file="$OPTARG"
@@ -97,30 +97,30 @@ if [ "$verbose" = true ]; then
 fi
 
 # Check if all required options are provided
-if [ -z "$genome_file" ] || [ -z "$position" ] || [ -z "$flanking_length" ]; then
+if [ -z "$genome_file" ] || [ -z "$position" ] || [ -z "$flanking_length" ] || [ -z "$chromosome" ] || [ -z "$alternate_allele" ] || [ -z "$reference_allele" ]; then
     echo 
-    echo "Error: Missing required options."
+    echo "*** Error: Missing required options. ***"
     usage
 fi
 
 # Check if genome file exists
 if [ ! -f "$genome_file" ]; then
     echo
-    echo "Error: Genome file '$genome_file' not found."
+    echo "*** Error: Genome file '$genome_file' not found. ***"
     exit 1
 fi
 
 # Check if position is a positive integer
 if ! [[ "$position" =~ ^[0-9]+$ ]]; then
     echo
-    echo "Error: Position should be a positive integer."
+    echo "*** Error: Position should be a positive integer. ***"
     exit 1
 fi
 
 # Check if flanking length is a positive integer
 if ! [[ "$flanking_length" =~ ^[0-9]+$ ]]; then
     echo
-    echo "Error: Flanking length should be a positive integer."
+    echo "*** Error: Flanking length should be a positive integer. ***"
     exit 1
 fi
 
@@ -128,7 +128,7 @@ fi
 if [ -n "$alternate_allele" ]; then
     if [[ ! "$alternate_allele" =~ ^[ATGC]$ ]]; then
         echo
-        echo "Error: Alternate allele must be one of A, T, G, or C."
+        echo "*** Error: Alternate allele must be one of A, T, G, or C. ***"
         exit 1
     fi
 fi
@@ -137,7 +137,7 @@ fi
 if [ -n "$reference_allele" ]; then
     if [[ ! "$reference_allele" =~ ^[ATGC]$ ]]; then
         echo
-        echo "Error: Alternate allele must be one of A, T, G, or C."
+        echo "*** Error: Alternate allele must be one of A, T, G, or C. ***"
         exit 1
     fi
 fi
@@ -145,7 +145,7 @@ fi
 # Check if position - flanking_length is less than 0
 if ((position - flanking_length < 0)); then
     echo
-    echo "Error: Flanking length too long for genome position."
+    echo "*** Error: Flanking length too long for genome position. ***"
     exit 1
 fi
 
