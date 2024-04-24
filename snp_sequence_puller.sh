@@ -2,22 +2,39 @@
 
 # Function to display script usage
 usage() {
-    echo "Usage: $0 -f <genome_file> -p <position> -l <flanking_length> [-c <chromosome>] [-a <alternate_allele>] [-v]"
-    echo "  -f, --genome-file       Input genome file"
-    echo "  -p, --position          Position in the genome"
-    echo "  -l, --length            Flanking sequence length"
-    echo "  -c, --chromosome        Chromosome"
-    echo "  -a, --alternate-allele  Alternate allele"
-    echo "  -v, --verbose           Enable verbose mode"
-    echo "  -h, --help              Display this help and exit"
     echo
-    echo "This script comes with no warranty. Use it at your own discretion."
+    echo "###############################################"
+    echo "#                                             #"
+    echo "#               Help Information              #"
+    echo "#                                             #"
+    echo "###############################################"
+    echo
+    echo "Usage:"
+    echo -e "\t$0 [OPTIONS] ARGUMENT"
+    echo
+    echo "Description:"
+    echo -e "\tThis script will take a known reference genome (.fa) and provided single nucleotide polymorphism (SNP)"
+    echo -e "\tand report back a formatted SNP with flanking sequences."
+    echo 
+    echo "Options:"
+    echo -e "\t-v, --verbose           Enable verbose mode"
+    echo -e "\t-h, --help              Display this help and exit"
+    echo
+    echo "Arguments:"
+    echo -e "\t-f, --genome-file       Input reference genome file"
+    echo -e "\t-p, --position          Position in the reference genome"
+    echo -e "\t-l, --length            Flanking sequence length"
+    echo -e "\t-c, --chromosome        Chromosome in reference genome"
+    echo -e "\t-a, --alternate-allele  Alternate allele of provided position"
+    echo -e "\t-r, --reference-allele  Reference allele of provided position"
+    echo
+    echo "Examples:"
+    echo -e "\tbash $0 -f 'example.fa' -p 200 -l 10 -c 'Chr1A' -a 'A' -r 'T'"
     exit 1
 }
 
 # Default values
 verbose=false
-
 
 # Parse command line options
 while getopts ":f:p:l:c:a:vh" opt; do
@@ -37,6 +54,9 @@ while getopts ":f:p:l:c:a:vh" opt; do
         a | --alternate-allele )
             alternate_allele="$OPTARG"
             ;;
+        r | --reference-allele )
+            reference_allele="$OPTARG"
+            ;;            
         v | --verbose )
             verbose=true
             ;;
@@ -57,15 +77,17 @@ shift $((OPTIND -1))
 
 if [ "$verbose" = true ]; then
     # Print header
+    echo
     echo "###############################################"
     echo "#                                             #"
     echo "#          SNP Sequence Puller v1.0           #"
     echo "#                                             #"
     echo "###############################################"
     echo
-    echo "Written by: Zachary Winn"
+    echo "Written by: Zachary J. Winn PhD"
     echo "Contact information:"
-    echo -e "\tEmail: zachary.winn@usda.gov"
+    echo -e "\tGovernment Email: zachary.winn@usda.gov"
+    echo -e "\tPersonal Email: zwinn@outlook.com"
     echo
     echo "###############################################"
     echo "# WARNING: This program is not under warranty #"
@@ -76,24 +98,28 @@ fi
 
 # Check if all required options are provided
 if [ -z "$genome_file" ] || [ -z "$position" ] || [ -z "$flanking_length" ]; then
+    echo 
     echo "Error: Missing required options."
     usage
 fi
 
 # Check if genome file exists
 if [ ! -f "$genome_file" ]; then
+    echo
     echo "Error: Genome file '$genome_file' not found."
     exit 1
 fi
 
 # Check if position is a positive integer
 if ! [[ "$position" =~ ^[0-9]+$ ]]; then
+    echo
     echo "Error: Position should be a positive integer."
     exit 1
 fi
 
 # Check if flanking length is a positive integer
 if ! [[ "$flanking_length" =~ ^[0-9]+$ ]]; then
+    echo
     echo "Error: Flanking length should be a positive integer."
     exit 1
 fi
@@ -101,6 +127,16 @@ fi
 # Check if alternate allele is provided and is valid
 if [ -n "$alternate_allele" ]; then
     if [[ ! "$alternate_allele" =~ ^[ATGC]$ ]]; then
+        echo
+        echo "Error: Alternate allele must be one of A, T, G, or C."
+        exit 1
+    fi
+fi
+
+# Check if referance allele is provided and valid
+if [ -n "$reference_allele" ]; then
+    if [[ ! "$reference_allele" =~ ^[ATGC]$ ]]; then
+        echo
         echo "Error: Alternate allele must be one of A, T, G, or C."
         exit 1
     fi
@@ -108,6 +144,7 @@ fi
 
 # Check if position - flanking_length is less than 0
 if ((position - flanking_length < 0)); then
+    echo
     echo "Error: Flanking length too long for genome position."
     exit 1
 fi
@@ -134,7 +171,15 @@ ref_allele="${extracted_sequence:$flanking_length:1}"
 if [[ ${#ref_allele} -eq 1 && ${#alternate_allele} -eq 1 && $ref_allele != $alternate_allele ]]; then
     :
 else
+    echo
     echo "'Error: reference and alternate alleles must be single-letter characters and must not match each other (E.G., Reference allele = "$ref_allele"; Alternate allele = "$alternate_allele").'"
+    exit 1
+fi
+
+# Check if the ref_allele pulled from the reference is correct 
+if [[ $ref_allele != $reference_allele ]]; then
+    echo
+    echo "'Error: reference provided and reference obtained from reference genome do not match each other (E.G., Reference allele = "$reference_allele"; Reference genome allele = "$ref_allele").'"
     exit 1
 fi
 
