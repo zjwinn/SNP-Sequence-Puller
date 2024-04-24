@@ -114,8 +114,8 @@ fi
 
 
 # Create a temporary BED file with the specified coordinates
-start=$((position - flanking_length))
-end=$((position + flanking_length + 1))
+start=$((position - flanking_length-1))
+end=$((position + flanking_length))
 echo -e "$chromosome\t$start\t$end" > temp.bed
 
 # Check verbose
