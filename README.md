@@ -50,8 +50,9 @@ The snp_sequence_puller_auto.sh uses snp_sequence_puller.sh to recursivly perfor
 The input file (-i) must be a tab delmited file that has the following columns
 1. chr (chromosome)
 2. pos (position)
-3. ref (reference allele)
-4. alt (alternate allele)
+3. id (name of the SNP)
+4. ref (reference allele)
+5. alt (alternate allele)
 
 To properly format, refer to the [example proivded](https://github.com/zjwinn/SNP-Sequence-Puller/blob/main/input_file_example.txt). Note, a sanity check will be performed to check if the reference provided and the "reference allele" provided agree. If this is not the case, the marker will be thrown out. 
 
@@ -69,4 +70,7 @@ bash snp_sequence_puller_auto.sh \
    -r path_to_refrence_sequence.fa \
    -v > snp_sequence_puller_auto.sh.log
 ```
-To run this example you will have to download the [RefSeqv2.1 Chinese Spring Wheat Genome Sequence](https://urgi.versailles.inrae.fr/download/iwgsc/IWGSC_RefSeq_Assemblies/v2.1/). 
+To run this example you will have to download the [RefSeqv2.1 Chinese Spring Wheat Genome Sequence](https://urgi.versailles.inrae.fr/download/iwgsc/IWGSC_RefSeq_Assemblies/v2.1/) and change "path_to_refrence_sequence.fa" in the above script to the appropriate path. If at any time you wish to display the help function, use the following:
+```bash
+bash snp_sequence_puller_auto.sh --help
+```
