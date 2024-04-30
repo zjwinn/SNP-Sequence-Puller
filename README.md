@@ -14,9 +14,9 @@ There are several requirments of both functions. Below I will detail the require
 ## snp_sequence_puller.sh
 The snp_sequence_puller.sh function requires several inputs to properly function. Below is a discritpion of the flags.
 
-1. -f, --genome-file       Input reference genome file
-2. -p, --position          Position in the reference genome
-3. -l, --length            Flanking sequence length
-4. -c, --chromosome        Chromosome in reference genome
-5. -a, --alternate-allele  Alternate allele of provided position
-6. -r, --reference-allele  Reference allele of provided position
+1. -f, --genome-file\tInput reference genome file
+2. -p, --position\tPosition in the reference genome
+3. -l, --length\tFlanking sequence length
+4. -c, --chromosome\tChromosome in reference genome
+5. -a, --alternate-allele\tAlternate allele of provided position
+6. -r, --reference-allele\tReference allele of provided position
