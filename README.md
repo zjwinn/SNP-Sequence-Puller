@@ -54,3 +54,19 @@ The input file (-i) must be a tab delmited file that has the following columns
 4. alt (alternate allele)
 
 To properly format, refer to the [example proivded](https://github.com/zjwinn/SNP-Sequence-Puller/blob/main/input_file_example.txt). Note, a sanity check will be performed to check if the reference provided and the "reference allele" provided agree. If this is not the case, the marker will be thrown out. 
+
+# Usage
+To use the shell scripts provided, call directly on them using the following code:
+```bash
+bash snp_sequence_puller_auto.sh
+```
+This will call on the script directly in the directory you are running in or it can be used to call on a directory outside the current working directory if specified. An example of how to run the function is provided below:
+```bash
+bash snp_sequence_puller_auto.sh \
+   -i input_file_example.txt \
+   -o example_output.txt \
+   -l 200 \
+   -r path_to_refrence_sequence.fa \
+   -v > snp_sequence_puller_auto.sh.log
+```
+To run this example you will have to download the [RefSeqv2.1 Chinese Spring Wheat Genome Sequence](https://urgi.versailles.inrae.fr/download/iwgsc/IWGSC_RefSeq_Assemblies/v2.1/). 
