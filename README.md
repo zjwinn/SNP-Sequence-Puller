@@ -15,14 +15,14 @@ There are several requirments of both functions. Below I will detail the require
 The snp_sequence_puller.sh function requires several inputs to properly function. Below is a discritpion of the flags.
 
 1. -f, --genome-file:
---Input reference genome file. This should be a fasta (.fa) file and the fasta file should come with an index (.fai). If the index is not present, this code will make one. If you do not have writting privilages in the directory of your reference genome, then the function may fail due to not being able to write an index if one is not present.
+ --Input reference genome file. This should be a fasta (.fa) file and the fasta file should come with an index (.fai). If the index is not present, this code will make one. If you do not have writting privilages in the directory of your reference genome, then the function may fail due to not being able to write an index if one is not present.
 2. -p, --position:
---Position in the reference genome. This should be an integer ranging from 0 to the end of the chromosome length.  
+ --Position in the reference genome. This should be an integer ranging from 0 to the end of the chromosome length.  
 3. -l, --length
---Flanking sequence length. This is the length in basepairs around your SNP. Note, if you provide a length longer than the amount of basepairs on either side, you will be greated with an error message.
+ --Flanking sequence length. This is the length in basepairs around your SNP. Note, if you provide a length longer than the amount of basepairs on either side, you will be greated with an error message.
 4. -c, --chromosome:
---Chromosome in reference genome. This must match the chromosome names provided in the reference (e.g., Chr1A vs. 1A)
+ --Chromosome in reference genome. This must match the chromosome names provided in the reference (e.g., Chr1A vs. 1A)
 5. -a, --alternate-allele
---Alternate allele of provided position. This must be a single nucleotide sequence. This must be a A, T, G, or C.
+ --Alternate allele of provided position. This must be a single nucleotide sequence. This must be a A, T, G, or C.
 6. -r, --reference-allele:
---Reference allele of provided position. This must be a single nucleotide sequence. This must be a A, T, G, or C.
+ --Reference allele of provided position. This must be a single nucleotide sequence. This must be a A, T, G, or C.
