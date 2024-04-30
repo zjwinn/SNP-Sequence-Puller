@@ -70,7 +70,11 @@ bash snp_sequence_puller_auto.sh \
    -r path_to_refrence_sequence.fa \
    -v > snp_sequence_puller_auto.sh.log
 ```
-To run this example you will have to download the [RefSeqv2.1 Chinese Spring Wheat Genome Sequence](https://urgi.versailles.inrae.fr/download/iwgsc/IWGSC_RefSeq_Assemblies/v2.1/) and change "path_to_refrence_sequence.fa" in the above script to the appropriate path. If at any time you wish to display the help function, use the following:
+To run this example you will have to download the [RefSeqv2.1 Chinese Spring Wheat Genome Sequence](https://urgi.versailles.inrae.fr/download/iwgsc/IWGSC_RefSeq_Assemblies/v2.1/) and **change "path_to_refrence_sequence.fa" in the above script to the appropriate path**. If at any time you wish to display the help function, use the following:
 ```bash
 bash snp_sequence_puller_auto.sh --help
 ```
+# Package Requirments
+This package requires the following to be installed:
+1. bedtools - [link to page](https://bedtools.readthedocs.io/en/latest/index.html)
+2. samtools/bcftools - [link to page](https://samtools.github.io/bcftools/) 
