@@ -46,3 +46,11 @@ The snp_sequence_puller_auto.sh uses snp_sequence_puller.sh to recursivly perfor
 
 4. **-r, --reference-geno:**  
     - Input reference genome file. This should be a fasta (.fa) file and the fasta file should come with an index (.fai). If the index is not present, this code will create one. If you do not have writing privileges in the directory of your reference genome, then the function may fail due to not being able to write an index if one is not present.
+
+The input file (-i) must be a tab delmited file that has the following columns
+1. chr (chromosome)
+2. pos (position)
+3. ref (reference allele)
+4. alt (alternate allele)
+
+To properly format, refer to the [example proivded](https://github.com/zjwinn/SNP-Sequence-Puller/blob/main/input_file_example.txt). Note, a sanity check will be performed to check if the reference provided and the "reference allele" provided agree. If this is not the case, the marker will be thrown out. 
