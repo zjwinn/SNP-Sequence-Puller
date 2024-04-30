@@ -77,4 +77,6 @@ bash snp_sequence_puller_auto.sh --help
 # Package Requirments
 This package requires the following to be installed:
 1. bedtools - [link to page](https://bedtools.readthedocs.io/en/latest/index.html)
-2. samtools/bcftools - [link to page](https://samtools.github.io/bcftools/) 
+2. samtools/bcftools - [link to page](https://samtools.github.io/bcftools/)
+
+Please make sure you have both programs installed properly prior to running to avoid errors.
