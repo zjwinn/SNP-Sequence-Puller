@@ -155,14 +155,14 @@ if [[ $chr_index == -1 || $pos_index == -1 || $ref_index == -1 || $alt_index == 
     exit 1
 fi
 
-if [ "$verbose"==true ]; then
+if [ "$verbose" = true ]; then
     echo "###############################"
     echo "# Header read in succesfully! #"
     echo "###############################"
     echo
 fi
 
-if [ "$verbose"==true ]; then
+if [ "$verbose" = true ]; then
     echo "#############################################"
     echo "# Pulling SNP sequences from input files... #"
     echo "#############################################"
