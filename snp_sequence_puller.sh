@@ -171,14 +171,12 @@ ref_allele="${extracted_sequence:$flanking_length:1}"
 if [[ ${#ref_allele} -eq 1 && ${#alternate_allele} -eq 1 && $ref_allele != $alternate_allele ]]; then
     :
 else
-    echo
     echo "'Error: reference and alternate alleles must be single-letter characters and must not match each other (E.G., Reference allele = "$ref_allele"; Alternate allele = "$alternate_allele").'"
     exit 1
 fi
 
 # Check if the ref_allele pulled from the reference is correct 
 if [[ $ref_allele != $reference_allele ]]; then
-    echo
     echo "'Error: reference provided and reference obtained from reference genome do not match each other (E.G., Reference allele = "$reference_allele"; Reference genome allele = "$ref_allele").'"
     exit 1
 fi
